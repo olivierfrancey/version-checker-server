@@ -25,4 +25,6 @@ https://github.com/whomwah/rqrcode
 
 ## TODO
 * Filters on tables
-* Encrypting doc_id's
+* Write file path into the data base
+* Integrity testing for files and qr-codes folders
+* Removing files and qr-codes when deleting the doc
