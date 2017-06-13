@@ -1,0 +1,31 @@
+<h1>Groups</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Project name</th>
+      <th>Firme</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @groups.each do |group| %>
+      <tr>
+        <td><%= group.name %></td>
+        <td><%= group.project_name %></td>
+        <td><%= group.firme %></td>
+        <td><%= link_to 'Edit', edit_group_path(group), class: 'btn btn-xs btn-primary' %></td>
+        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="form-group">
+  <%= link_to 'New Group', new_group_path, class: 'btn btn-default' %>
+</div>

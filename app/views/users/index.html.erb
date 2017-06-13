@@ -1,0 +1,43 @@
+<h1>Users</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Firme</th>
+      <th>Email</th>
+      <th>Admin rights</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.firme %></td>
+        <td><%= user.email %></td>
+        <td><% if user.admin == 0 %>
+          <%= 'None' %>
+        <% elsif user.admin == 1 %>
+          <%= 'Admin' %>
+        <% elsif user.admin == 2 %>
+          <%= 'SuperAdmin' %>
+        <% else %>
+          <%= 'Not defined' %>
+        <% end %></td>
+        <td><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-xs btn-primary' %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="form-group">
+  <%= link_to 'New User', new_user_path, class: 'btn btn-default' %>
+</div>

@@ -1,0 +1,79 @@
+<h1>Editing Doc</h1>
+
+<%= form_with(model: @doc, local: true) do |f| %>
+
+  <div class="field">
+    <%= 'ID' %>
+    <%= @doc.id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :group_id %>
+    <%= f.text_field :group_id, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :number %>
+    <%= f.text_field :number, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sub_title %>
+    <%= f.text_field :sub_title, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :version %>
+    <%= f.text_field :version, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_version %>
+    <%= f.check_box :last_version, checked_value: true, unchecked_value: false %>
+  </div>
+
+  <div class="field">
+    <%= f.label :doc_date %>
+    <%= f.text_field :doc_date, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :author %>
+    <%= f.text_field :author, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :doc_type %>
+    <%= f.text_field :doc_type, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :size %>
+    <%= f.text_field :size, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :comments %>
+    <%= f.text_field :comments, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= link_to 'Upload file', new_upload_path, class: 'btn btn-primary' %>
+  </div>
+
+  <div class="form-group">
+    <span class="actions">
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
+    </span>
+
+    <span>
+      <%= link_to 'Cancel', docs_path, class: 'btn btn-default' %>
+    </span>
+  </div>
+
+<% end %>

@@ -1,0 +1,38 @@
+<h1>New Group</h1>
+
+<%= form_with(model: @group, local: true) do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, 'error') %> prohibited this user from signing up:</h2>
+
+      <ul>
+      <% @group.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Group name' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :project_name %>
+    <%= f.text_field :project_name, class: 'form-control' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :firme %>
+    <%= f.text_field :firme, class: 'form-control' %>
+  </div>
+
+  <span class="actions">
+    <%= f.submit 'Create new group', class: 'btn btn-primary' %>
+  </span>
+
+  <span>
+    <%= link_to 'Cancel', groups_path, class: 'btn btn-default' %>
+  </span>
+<% end %>
