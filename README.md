@@ -13,15 +13,15 @@ Rails 5.1.1
 
 ## System dependencies
 ### QR-code encoder
+rqrcode 0.10.1
 https://github.com/whomwah/rqrcode
+(MIT License)
 
-## Database creation
+## Database initialisation
 ``` ruby
  rails db:migrate
- rails db:seed 
+ rails db:seed
 ```
-
-## Database initialization
 
 ## TODO
 * Filters on tables

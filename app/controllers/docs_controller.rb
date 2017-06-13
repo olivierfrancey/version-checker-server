@@ -18,6 +18,7 @@ class DocsController < ApplicationController
     @doc = Doc.find(params[:id])
     respond_to do |format|
       msg = { :status => "ok", :doc => @doc }
+
       format.json  { render :json => msg }
     end
   end
@@ -35,15 +36,23 @@ class DocsController < ApplicationController
   # POST /docs
   # POST /docs.json
   def create
+
     @doc = Doc.new(doc_params)
 
     respond_to do |format|
       if @doc.save
         # get new insertion ID
-          TODO
+        d = Doc.order("created_at").last
         # generate QR-code
-          TODO
-        format.html { redirect_to @doc, notice: 'Doc was successfully created.' }
+        require 'rqrcode'
+        qrcode = RQRCode::QRCode.new(d.id.to_s)
+        svg = qrcode.as_svg(offset: 0, color: '000',
+                    shape_rendering: 'crispEdges',
+                    module_size: 11)
+        image_path = File.join(Rails.root, 'public/files/qr-codes', d.id.to_s)
+        IO.write(image_path + '.svg', svg.encode('UTF-8', { :invalid => :replace, :undef => :replace, :replace => '?'}))
+
+        format.html { redirect_to docs_path, notice: 'Doc was successfully created.' }
         format.json { render :show, status: :created, location: @doc }
       else
         format.html { render :new }
@@ -57,7 +66,7 @@ class DocsController < ApplicationController
   def update
     respond_to do |format|
       if @doc.update(doc_params)
-        format.html { redirect_to @doc, notice: 'Doc was successfully updated.' }
+        format.html { redirect_to docs_path, notice: 'Doc was successfully updated.' }
         format.json { render :show, status: :ok, location: @doc }
       else
         format.html { render :edit }
@@ -84,6 +93,6 @@ class DocsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doc_params
-      params.require(:doc).permit(:id, :group_id, :doc_id, :number, :title, :sub_title, :version, :doc_date, :author, :doc_type, :format)
+      params.require(:doc).permit(:id, :group_id, :doc_id, :number, :title, :last_version, :sub_title, :version, :doc_date, :author, :doc_type, :format)
     end
 end
