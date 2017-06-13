@@ -16,11 +16,13 @@ Rails 5.1.1
 https://github.com/whomwah/rqrcode
 
 ## Database creation
-''' rails db:migrate '''
-''' rails db:seed '''
+``` ruby
+ rails db:migrate
+ rails db:seed 
+```
 
 ## Database initialization
 
 ## TODO
-* Filters on tables$
+* Filters on tables
 * Encrypting doc_id's
