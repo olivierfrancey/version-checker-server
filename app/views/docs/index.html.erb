@@ -1,5 +1,9 @@
 <h1>Docs</h1>
 
+<div class="form-group">
+  <%= link_to 'New Doc', new_doc_path, class: 'btn btn-default' %>
+</div>
+
 <table class="table table-striped table-sm">
   <thead>
     <tr>
@@ -39,9 +43,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<div class="form-group">
-  <%= link_to 'New Doc', new_doc_path, class: 'btn btn-default' %>
-</div>

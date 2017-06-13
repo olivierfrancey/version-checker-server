@@ -31,6 +31,7 @@ class DocsController < ApplicationController
 
   # GET /docs/1/edit
   def edit
+    @img_path = File.join('qr-codes', @doc.encrypted_id) + '.svg'
   end
 
   # POST /docs
@@ -51,7 +52,7 @@ class DocsController < ApplicationController
         svg = qrcode.as_svg(offset: 0, color: '000',
                     shape_rendering: 'crispEdges',
                     module_size: 11)
-        image_path = File.join(Rails.root, 'public/files/qr-codes', encrypted_id)
+        image_path = File.join(Rails.root, 'app/assets/images/qr-codes', encrypted_id)
         IO.write(image_path + '.svg', svg.encode('UTF-8', { :invalid => :replace, :undef => :replace, :replace => '?'}))
 
         format.html { redirect_to docs_path, notice: 'Doc was successfully created.' }
@@ -95,13 +96,7 @@ class DocsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doc_params
-      params.require(:doc).permit(:id, :group_id, :doc_id, :number, :title, :last_version, :sub_title, :version, :doc_date, :author, :doc_type, :format)
+      params.require(:doc).permit(:id, :group_id, :doc_id, :number, :title, :last_version, :sub_title, :version, :doc_date, :author, :doc_type, :size)
     end
 
-    def encrypted_id(id)
-      #salt = ENV['SALT'] # We save the value of: SecureRandom.random_bytes(64)
-      key = ENV['KEY']   # We save the value of: ActiveSupport::KeyGenerator.new('password').generate_key(salt)
-      crypt = ActiveSupport::MessageEncryptor.new(key)
-      return crypt.encrypt_and_sign(self.id) # or crypt.encrypt_and_sign(self.consumer_key)
-    end
 end
