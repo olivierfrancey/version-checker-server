@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resource :session, only: %i[new create destroy]
   resources :uploads, only: %i[new create]
 
+  resources :checker, only: %i[show]
+
   resources :groups
   resources :users
   resources :docs
