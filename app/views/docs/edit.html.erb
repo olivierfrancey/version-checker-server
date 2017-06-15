@@ -63,7 +63,8 @@
   </div>
 
   <div class="qr-code">
-    <%= image_tag @img_path, height: '100px', width: '100px', alt: 'QR-Code' %>
+    <%= image_tag @img_path, height: '200px', width: '200px', alt: 'QR-Code' %>
+    <%= @doc.encrypted_id %>
   </div>
 
   <div class="actions">
