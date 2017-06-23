@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20170609140640) do
     t.text "comments"
     t.string "author"
     t.decimal "version"
-    t.boolean "last_version"
+    t.boolean "last_version", default: false
     t.string "doc_type"
     t.string "size"
     t.string "file_name"

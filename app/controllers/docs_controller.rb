@@ -31,7 +31,9 @@ class DocsController < ApplicationController
 
   # GET /docs/1/edit
   def edit
-    @img_path = File.join('qr-codes', @doc.encrypted_id) + '.svg'
+    if @doc.encrypted_id.present?
+      @img_path = File.join('qr-codes', @doc.encrypted_id) + '.svg'
+    end
   end
 
   # POST /docs
@@ -45,7 +47,7 @@ class DocsController < ApplicationController
         # get new insertion ID
         d = Doc.order("created_at").last
         encrypted_id = SecureRandom.hex(17)
-        Doc.update({encrypted_id: encrypted_id})
+        d.update({encrypted_id: encrypted_id})
         # generate QR-code
         require 'rqrcode'
         qrcode = RQRCode::QRCode.new(encrypted_id)

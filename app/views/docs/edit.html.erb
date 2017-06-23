@@ -64,14 +64,14 @@
 
 
   <div class="qr-code form-group">
-
-    <%= image_tag @img_path, height: '200px', width: '200px', alt: 'QR-Code' %>
-    <%= @doc.encrypted_id %>
-
+    <% if @doc.encrypted_id.present? %>
+      <%= image_tag @img_path, height: '200px', width: '200px', alt: 'QR-Code' %>
+      <%= @doc.encrypted_id %>
+    <% end %>
   </div>
 
   <div class="actions">
-    <%= link_to 'Upload file', new_upload_path, class: 'btn btn-primary' %>
+    <%= link_to 'Upload file', new_upload_path(id: @doc.id), class: 'btn btn-primary' %>
   </div>
 
   <div class="form-group">
