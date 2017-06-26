@@ -7,7 +7,7 @@
 <table class="table table-striped table-sm">
   <thead>
     <tr>
-      <th>Group</th>
+      <th>Project</th>
       <th>Number</th>
       <th>Title</th>
       <th>Sub title</th>
@@ -29,7 +29,7 @@
       <% else %>
         <tr>
       <% end %>
-        <td><%= doc.group_id %></td>
+        <td><%= doc.group.name %></td>
         <td><%= doc.number %></td>
         <td><%= doc.title %></td>
         <td><%= doc.sub_title %></td>
@@ -40,7 +40,7 @@
         <td><%= doc.size %></td>
         <td><%= doc.id %></td>
         <td><%= link_to 'Edit', edit_doc_path(doc), class: 'btn btn-xs btn-primary' %></td>
-        <td><%= link_to 'Destroy', doc, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %></td>
+        <td><%= link_to 'Delete', doc, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
