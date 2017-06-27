@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: redirect('docs')
+  root to: redirect('groups')
 
   resource :session, only: %i[new create destroy]
   resources :uploads, only: %i[new create]

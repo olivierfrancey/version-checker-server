@@ -1,7 +1,7 @@
 class CheckerController < ApplicationController
 
   def show
-    @doc = Doc.where encrypted_id: params[:id]
+    @doc = Doc.where(encrypted_id: params[:id]).first!
     respond_to do |format|
       msg = { :status => "ok", :doc => @doc }
       format.json  { render :json => msg }

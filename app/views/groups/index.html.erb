@@ -1,31 +1,23 @@
 <h1>Projects</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Project name</th>
-      <th>Firme</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-        <td><%= group.project_name %></td>
-        <td><%= group.firme %></td>
-        <td><%= link_to 'Edit', edit_group_path(group), class: 'btn btn-xs btn-primary' %></td>
-        <td><%= link_to 'Delete', group, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %></td>
-      </tr>
+<% @groups.each do |group| %>
+<div class="group_item">
+  <h3><%= group.name %><br>
+      <%= group.project_name %></h3>
+  <p><%= group.firme %></p>
+  <%= link_to 'Edit', edit_group_path(group), class: 'btn btn-xs btn-primary' %>
+  <%= link_to 'Delete', group, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger' %>
+</div>
+<% end %>
+
+
+<div class="group_item">
+  <div class="new">
+    <%= link_to new_group_path do %>
+      <div class="btn btn-link">
+        <span class="glyphicon glyphicon-plus"></span>
+      </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<div class="form-group">
-  <%= link_to 'New Project', new_group_path, class: 'btn btn-default' %>
+  </div>
 </div>
