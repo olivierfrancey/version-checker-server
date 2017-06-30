@@ -1,6 +1,6 @@
 <h1>Upload file</h1>
 
-<%= form_with url: uploads_path do |f| %>
+<%= form_with url: uploads_path(id: @id) do |f| %>
   <div class="field">
     <%= f.file_field :file, accept: 'application/pdf', class: 'btn btn-default' %>
   </div>

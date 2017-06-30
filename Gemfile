@@ -35,6 +35,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rqrcode'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'prawn'
+gem 'combine_pdf'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

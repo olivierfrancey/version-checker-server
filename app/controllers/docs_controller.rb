@@ -32,7 +32,7 @@ class DocsController < ApplicationController
   # GET /docs/1/edit
   def edit
     if @doc.encrypted_id.present?
-      @img_path = File.join('qr-codes', @doc.encrypted_id) + '.svg'
+      @img_path = File.join('qr-codes', @doc.encrypted_id) + '.png'
     end
   end
 
@@ -49,13 +49,19 @@ class DocsController < ApplicationController
         encrypted_id = SecureRandom.hex(17)
         d.update({encrypted_id: encrypted_id})
         # generate QR-code
-        require 'rqrcode'
+        # require 'rqrcode'
         qrcode = RQRCode::QRCode.new(encrypted_id)
-        svg = qrcode.as_svg(offset: 0, color: '000',
-                    shape_rendering: 'crispEdges',
-                    module_size: 11)
-        image_path = File.join(Rails.root, 'app/assets/images/qr-codes', encrypted_id)
-        IO.write(image_path + '.svg', svg.encode('UTF-8', { :invalid => :replace, :undef => :replace, :replace => '?'}))
+        image_path = File.join(Rails.root, 'app/assets/images/qr-codes', encrypted_id) + '.png'
+        File.open(image_path, 'wb') {|f| f.write qrcode.as_png(
+          resize_gte_to: false,
+          resize_exactly_to: false,
+          fill: 'white',
+          color: 'black',
+          size: 200,
+          border_modules: 1,
+          module_px_size: 6,
+          file: nil # path to write
+        )}
 
         format.html { redirect_to docs_path, notice: 'Doc was successfully created.' }
         format.json { render :show, status: :created, location: @doc }
